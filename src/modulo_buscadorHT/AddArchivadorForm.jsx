@@ -34,7 +34,7 @@ const AddArchivadorForm = ({ onRecordAdded, onCancel, showForm, onToastMessage }
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post('http://192.168.3.96:5000/api/archivadores', formData);
+      const response = await axios.post('http://192.168.18.12:5000/api/archivadores', formData);
       console.log('Record added successfully:', response.data);
       onRecordAdded();
       onToastMessage('Registro agregado con éxito.');

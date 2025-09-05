@@ -28,7 +28,7 @@ const ArchivadoresList = ({ username }) => {
   const handleFetchSuggestions = async (query) => {
     if (query.length > 2) {
       try {
-        const response = await axios.get(`http://192.168.3.96:5000/api/suggestions?q=${query}`);
+        const response = await axios.get(`http://192.168.18.12:5000/api/suggestions?q=${query}`);
         setSuggestions(response.data);
         setShowSuggestions(true);
       } catch (err) {
@@ -80,7 +80,7 @@ const ArchivadoresList = ({ username }) => {
     queryParams.set('offset', offset);
 
     try {
-      const response = await axios.get(`http://192.168.3.96:5000/api/archivadores?${queryParams.toString()}`);
+      const response = await axios.get(`http://192.168.18.12:5000/api/archivadores?${queryParams.toString()}`);
       setData(response.data.rows);
       setTotalResults(response.data.count);
       setCurrentPage(page);
@@ -100,7 +100,7 @@ const ArchivadoresList = ({ username }) => {
   const handleUpdateStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === 'PAGADO' ? 'NO PAGADO' : 'PAGADO';
     try {
-      await axios.put(`http://192.168.3.96:5000/api/archivadores/${id}/estado`, { estado: newStatus });
+      await axios.put(`http://192.168.18.12:5000/api/archivadores/${id}/estado`, { estado: newStatus });
       
       const updatedData = data.map(item =>
         item.id === id ? { ...item, estado: newStatus } : item
@@ -116,7 +116,7 @@ const ArchivadoresList = ({ username }) => {
 
   const handleDeleteRecord = async (id) => {
     try {
-      await axios.delete(`http://192.168.3.96:5000/api/archivadores/${id}`);
+      await axios.delete(`http://192.168.18.12:5000/api/archivadores/${id}`);
       setData(data.filter(item => item.id !== id));
       setTotalResults(prev => prev - 1);
       showToast(`Registro eliminado exitosamente.`);
